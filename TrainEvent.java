@@ -13,6 +13,15 @@ public class TrainEvent implements Event{
     public void run(){
         int unloadtime = train.unload(stop);
         int loadtime = train.load(stop);
+        Stats.addToTrainCapacity(train);
+        if (stop.getStopNumber()==1 && train.direction=='W'){
+            train.direction='E';
+            loadtime+=train.load(stop);
+        }
+        if (stop.getStopNumber()==23 && train.direction=='E'){
+            train.direction='W';
+            loadtime+=train.load(stop);
+        }
         TrainEvent next;
         if (train.direction=='W') {
             next = new TrainEvent(train, stop.getWest());

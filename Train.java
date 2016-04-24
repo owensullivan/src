@@ -89,7 +89,8 @@ public class Train {
         while (((Person)(passengerlist.top())).getDestNumber()==s.getStopNumber()){
             Person exitingpass = (Person) passengerlist.pop();
             time+=2;
-            //add to stats
+            Stats.addToWaitTime(exitingpass);
+            Stats.addToTravelTime(exitingpass);
         }
         return time;
     }
